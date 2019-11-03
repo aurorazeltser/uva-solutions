@@ -1,0 +1,16 @@
+#include <iostream>
+#include <algorithm> 
+#include <string>
+#include <cstdlib> 
+
+using namespace std; 
+int main()
+{
+    string s; 
+    while (cin>>s && s!="#"){
+        bool b=next_permutation(s.begin(),s.end()); 
+        if (b) cout<<s<<"\n"; 
+        else cout<<"No Successor"<<"\n"; 
+    }
+    return 0; 
+}
