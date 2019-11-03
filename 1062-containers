@@ -1,0 +1,28 @@
+#include <iostream> 
+#include <algorithm> 
+#include <string> 
+#include <vector> 
+
+using namespace std; 
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0); 
+    vector<char>v(27); 
+    int k=1; string s; 
+    while (cin>>s && s!="end"){
+        int c=1; 
+        v.push_back(s[0]);
+        for (int i=1; i<s.size(); i++){
+            int d=1;
+            for (int j=0; j<v.size(); j++){
+                if (s[i]<=v[j]) {d=0; v[j]=s[i]; break;}
+            }
+            if (d) {c+=1; v.push_back(s[i]);}
+        }
+        cout<<"Case "<<k<<": "<<c<<"\n"; 
+        k+=1;
+        v.clear();
+    }
+    return 0;
+}
