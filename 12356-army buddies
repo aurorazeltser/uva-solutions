@@ -1,0 +1,33 @@
+#include <iostream> 
+#include <algorithm> 
+#include <cstdlib> 
+#include <vector> 
+
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0); 
+    int s,b; 
+    while (cin>>s>>b && s||b){
+        vector<int>r(100001); 
+        vector<int>l(100001); 
+        for (int i=1; i<=s; i++){
+            r[i]=i+1; 
+            l[i]=i-1; 
+        }
+        r[s]=0;
+        int cl,cr; 
+        for (int i=1; i<=b; i++){
+            cin>>cl>>cr; 
+            if (l[cl]) cout<<l[cl]<<" "; 
+            else cout<<"* "; 
+            if (r[cr]) cout<<r[cr]<<"\n"; 
+            else cout<<"*"<<"\n"; 
+            r[l[cl]]=r[cr]; 
+            l[r[cr]]=l[cl]; 
+        }
+        cout<<'-'<<"\n"; 
+    }
+    return 0; 
+}
