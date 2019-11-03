@@ -1,0 +1,48 @@
+#include <iostream>
+#include <algorithm> 
+#include <utility> 
+#include <climits> 
+#include <vector> 
+#include <queue> 
+
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0); 
+    int c; 
+    int n,t,m; 
+    cin>>c; 
+    while (c--){
+        cin>>n>>t>>m; 
+        vector<queue<pair<int,int>>>v(2); 
+        // at-arrival time 
+        vector<int>at(m);
+        // ct-current time, pos-position (1=left, 0=right)
+        int ct=0,pos=1; 
+        int a; string b; 
+        for (int i=0; i<m; i++){
+            cin>>a>>b; 
+            if (b=="left") {v[1].push(pair<int,int>(a,i));}
+            else {v[0].push(pair<int,int>(a,i));}
+        }
+        while (!(v[1].empty() && v[0].empty())){
+            int k=INT_MAX; 
+            // update current time if needed 
+            if (!v[1].empty()) {k=min(k,v[1].front().first);}
+            if (!v[0].empty()) {k=min(k,v[0].front().first);}
+            ct=max(ct,k); 
+            k=1; 
+            while (!v[pos].empty() && v[pos].front().first<=ct && k<=n){
+                at[v[pos].front().second]=ct+t; 
+                v[pos].pop(); 
+                k+=1;
+            }
+            ct+=t; 
+            pos^=1; 
+        }
+        for (int i=0; i<m; i++) {cout<<at[i]<<"\n";}
+        if (c) {cout<<"\n";}
+    }
+    return 0;
+}
