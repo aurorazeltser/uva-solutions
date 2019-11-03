@@ -1,0 +1,52 @@
+#include <iostream> 
+#include <algorithm> 
+#include <cstdlib> 
+
+using namespace std; 
+int main()
+{
+    int N,n; 
+    char x[1000][1000], y[1000][1000]; 
+    while (cin>>N>>n && N||n){
+        for (int i=0; i<N; i++){
+            for (int j=0; j<N; j++){
+                cin>>x[i][j]; 
+            }
+        }
+        for (int i=0; i<n; i++){
+            for (int j=0; j<n; j++){
+                cin>>y[i][j]; 
+            }
+        }
+        int a=4; 
+        while (a--){
+            int c=0; 
+            for (int i=0; i<N-n+1; i++){
+                for (int j=0; j<N-n+1; j++){
+                    bool b=true; 
+                    for (int k=0; k<n; k++){
+                        for (int l=0; l<n; l++){
+                            if (x[i+k][j+l]!=y[k][l]) {b=false; break; break;}
+                        }
+                    }
+                    if (b) c+=1; 
+                }
+            }
+            cout<<c; 
+            if (a) cout<<" "; 
+            char z[n][n]; 
+            for (int i=0; i<n; i++){
+                for (int j=0; j<n; j++){
+                    z[j][n-i-1]=y[i][j]; 
+                }
+            }
+            for (int i=0; i<n; i++){
+                for (int j=0; j<n; j++){
+                    y[i][j]=z[i][j]; 
+                }
+            }
+        }
+        cout<<"\n";
+    }
+    return 0;
+}
