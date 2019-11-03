@@ -1,0 +1,31 @@
+#include <iostream>
+#include <algorithm>
+#include <map> 
+
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0); 
+    map<int,int>m;
+    long s; 
+    int n,c; 
+    cin>>c; 
+    while (c--){
+        cin>>n;
+        // l-length of current subsequence of unique snowflakes
+        // i-index of most recent snowflake that has been repeated 
+        int mx=0,l=0,i=0;
+        for (int j=1; j<=n; j++){
+            cin>>s; 
+            // check if s has been visited, and if so, update l and i
+            if (m[s]) {i=max(i,m[s]); l=j-i-1;}
+            l+=1; 
+            mx=max(mx,l); 
+            m[s]=j; 
+        }
+        cout<<mx<<"\n"; 
+        m.clear(); 
+    }
+    return 0;
+}
