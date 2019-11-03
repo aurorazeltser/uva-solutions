@@ -1,0 +1,30 @@
+#include <iostream> 
+#include <algorithm> 
+
+typedef long long ll; 
+
+using namespace std; 
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0); 
+    ll n; 
+    while (cin>>n && n){
+        ll a=0,b=0; 
+        int c=0,d=1; 
+        while (n){
+            // determine if cth bit is 1, if so, let it be i
+            if (n&1){
+                // for the kth i, check if k is even or odd
+                if (d) {a|=(1LL<<c);}
+                else {b|=(1LL<<c);}
+                // negate d so it can alternate based on the parity of k
+                d=!d; 
+            }
+            n>>=1; 
+            c+=1; 
+        }
+        cout<<a<<" "<<b<<"\n"; 
+    }
+    return 0; 
+}
