@@ -1,0 +1,37 @@
+#include <iostream>
+#include <algorithm> 
+#include <vector> 
+#include <queue> 
+
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0); 
+    int c; 
+    int l,m;
+    cin>>c; 
+    while (c--){
+        int n=0,k=1; 
+        int a; string b; 
+        vector<queue<int>>v(2); 
+        cin>>l>>m; 
+        l*=100; 
+        for (int i=0; i<m; i++){
+            cin>>a>>b; 
+            if (b=="left") {v[1].push(a);}
+            else {v[0].push(a);} 
+        }
+        while (!(v[1].empty() && v[0].empty())){
+            int q=0; 
+            while (!v[k].empty() && ((v[k].front()+q)<=l)){
+                q+=v[k].front(); 
+                v[k].pop(); 
+            }
+            n+=1; 
+            k^=1; 
+        }
+        cout<<n<<"\n"; 
+    }
+    return 0; 
+}
