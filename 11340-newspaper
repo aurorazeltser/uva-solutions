@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cstdio> 
+#include <algorithm> 
+#include <string> 
+#include <vector> 
+
+using namespace std; 
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0); 
+    int n; 
+    cin>>n; 
+    while (n--){
+        vector<int>a(256,0); 
+        int k; 
+        cin>>k; 
+        while (k--){
+            char x; int y; 
+            cin>>x>>y; 
+            a[x]=y;
+        }
+        double t=0; string s;
+        int l;
+        cin>>l; 
+        getline(cin,s); 
+        while (l--){
+            getline(cin,s); 
+            for (auto it=s.begin(); it!=s.end(); ++it){
+                t+=a[*it];
+            }
+        }
+        printf("%0.2lf$\n", t/100);
+    }
+    return 0; 
+}
