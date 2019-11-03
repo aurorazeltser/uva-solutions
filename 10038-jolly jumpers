@@ -1,0 +1,26 @@
+#include <iostream> 
+#include <algorithm> 
+#include <cstdlib>
+#include <cstring>
+#include <vector> 
+
+using namespace std; 
+int main()
+{
+    int n; 
+    while (cin>>n){
+        string s="Jolly"; 
+        vector<bool>a(3005,true); 
+        int x,y; 
+        cin>>y;
+        for (int i=1; i<n; i++){
+            x=y;
+            cin>>y; 
+            int d=abs(y-x);
+            if (d<n && a[d]) a[d]=false; 
+            else s="Not jolly"; 
+        }
+        cout<<s<<"\n";
+    }
+    return 0;
+}
