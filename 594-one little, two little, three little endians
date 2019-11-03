@@ -1,0 +1,24 @@
+#include <iostream> 
+#include <algorithm> 
+
+typedef long long ll; 
+
+using namespace std; 
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0); 
+    ll n; 
+    while (cin>>n){
+        ll m=n, c=0; 
+        int k=4; 
+        while (k--){
+            // 0xff => 00..0011111111 (32-bits long)
+            int b=m&0xff; 
+            c|=(b<<8*k); 
+            m>>=8; 
+        }
+        cout<<n<<" converts to "<<c<<"\n"; 
+    }
+    return 0; 
+}
