@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+// everything included in standard library 
+
+using namespace std; 
+
+//s-solved, p-penalty
+int s[101][10], p[101][10]; 
+
+//comparator function
+bool comp(int a, int b){
+    int sa=0, sb=0, pa=0, pb=0; 
+    for (int i=0; i<10; i++){
+        if (s[a][i]) {pa+=p[a][i]; sa+=1;}
+    }
+    for (int i=0; i<10; i++){
+        if (s[b][i]) {pb+=p[b][i]; sb+=1;}
+    }
+    if (sa>sb) return true; 
+    else if (sb>sa) return false; 
+    else {
+        if (pa<pb) return true; 
+        else if (pb<pa) return false; 
+        else return (a<b); 
+    }
+}
+
+
+int main()
+{
+    vector<int>v; 
+    int tm, n, t; 
+    char l; string in; 
+    int k; 
+    cin>>k; 
+    getline(cin,in); 
+    getline(cin,in); 
+    while (k--){
+        memset(s, 0, sizeof(int)*101*10);
+      	memset(p, 0, sizeof(int)*101*10);
+        v.clear(); 
+        while (getline(cin,in), in.size()>0){
+            //parse line of input 
+            stringstream ss(in); 
+            ss>>tm>>n>>t>>l; 
+            bool b=!s[tm][n]; 
+            if (l=='I' && b) p[tm][n]+=20; 
+            else if (l=='C') {
+                if (b) p[tm][n]+=t;
+                s[tm][n]=1; 
+            }
+            if (find(v.begin(),v.end(),tm)==v.end()) v.push_back(tm); 
+        }
+        sort(v.begin(),v.end(),comp); 
+        for (int c: v){
+            int ts=0, tp=0;
+            for (int i=0; i<10; i++){
+                if (s[c][i]) {tp+=p[c][i]; ts+=1;}
+            }
+            cout<<c<<" "<<ts<<" "<<tp<<"\n"; 
+        }
+        if (k>0) cout<<"\n";
+    }
+    return 0;
+}
