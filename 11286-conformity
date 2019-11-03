@@ -1,0 +1,33 @@
+#include <iostream> 
+#include <algorithm> 
+#include <vector> 
+#include <map> 
+
+using namespace std; 
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0);
+    map<vector<int>,int>m; 
+    map<vector<int>,int>::iterator it;
+    vector<int>v(5); 
+    int n; 
+    while (cin>>n && n){
+        while (n--){
+            for (int i=0; i<5; i++){
+                cin>>v[i]; 
+            }
+            sort(v.begin(),v.end());
+            m[v]+=1; 
+        }
+        int mx=0, k=0; 
+        for (it=m.begin(); it!=m.end(); it++){
+            int s=it->second; 
+            if (s>mx) {mx=s; k=0;}
+            if (mx==s) {k+=mx;}
+        }
+        cout<<k<<"\n"; 
+        m.clear();
+    }
+    return 0; 
+}
