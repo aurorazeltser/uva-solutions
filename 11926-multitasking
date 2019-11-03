@@ -1,0 +1,41 @@
+#include <iostream> 
+#include <algorithm> 
+#include <bitset> 
+// use bitset for bit manipulations 
+
+using namespace std; 
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0); 
+    const int mx=1000001; 
+    bitset<mx>v; 
+    int n,m,s,e,itv; 
+    while (cin>>n>>m && (n||m)){
+        bool b=true; 
+        for (int i=0; i<n; i++){
+            cin>>s>>e; 
+            if (!b) {continue;} 
+            for (int j=s; j<e; j++){
+                // check if bit has been visited, if not, mark it as such
+                if (v[j]) {b=false; break;}
+                v[j]=1; 
+            }
+        }
+        for (int i=0; i<m; i++){
+            cin>>s>>e>>itv; 
+            if (!b) {continue;}
+            while (e<mx){
+                for (int j=s; j<e; j++){
+                    if (v[j]) {b=false; break; break;}
+                    v[j]=1;
+                }
+                s+=itv; e+=itv; 
+            }
+        }
+        if (b) {cout<<"NO CONFLICT"<<"\n";} 
+        else {cout<<"CONFLICT"<<"\n";}
+        v.reset(); 
+    }
+    return 0;
+}
