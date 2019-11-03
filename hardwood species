@@ -1,0 +1,32 @@
+#include <iostream> 
+#include <algorithm> 
+#include <string> 
+#include <map> 
+
+using namespace std; 
+int main()
+{
+    ios::sync_with_stdio(false); 
+    cin.tie(0); 
+    // "precision" set to 4 decimal places 
+    cout.precision(4);
+    // use map that contains tree species with its corresponding population
+    map<string,int>m; 
+    map<string,int>::iterator it; 
+    string s; 
+    int c; 
+    cin>>c; 
+    getline(cin,s); 
+    getline(cin,s); 
+    while (c--){
+        double t=0;
+        while (getline(cin,s) && s!="") {t+=1; m[s]+=1;}
+        for (it=m.begin(); it!=m.end(); it++){
+            // "fixed" has output be printed to number of decimal places specified by "precision"
+            cout<<(it->first)<<" "<<fixed<<((it->second)*100/t)<<"\n"; 
+        }
+        if (c) {cout<<"\n";}
+        m.clear();
+    }
+    return 0;
+}
